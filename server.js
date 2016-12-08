@@ -1,16 +1,19 @@
+require('dotenv').config();
+
 var express = require('express')
 var Sequelize = require('sequelize')
 var cors = require('cors')
 var bodyParser = require('body-parser')
 
+
 var app = express()
 
-var DB_NAME = 'gueramian'
-var DB_USER = 'gueramian'
-var DB_PASSWORD = 'node node 2016'
+var DB_NAME = process.env.DB_NAME
+var DB_USER = process.env.DB_USER
+var DB_PASSWORD = process.env.DB_PASSWORD
 var sequelize =  new Sequelize(DB_NAME,DB_USER,DB_PASSWORD,{
   dialect: 'mysql',
-  host: 'itp460.usc.edu'
+  host: process.env.DB_HOST
 })
 
 var Post = sequelize.define('post', {
@@ -261,4 +264,4 @@ app.put("/api/1/posts/:id", function(request,response) {
 
 })
 
-app.listen(3000)
+app.listen(process.env.PORT)
